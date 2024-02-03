@@ -21,7 +21,7 @@ public class Student {
     private String name;
 
     @Column(name = "last_name")
-    private String lastname;
+    private String lastName;
     private Integer age;
 
     // Muitos estudantes para um curso

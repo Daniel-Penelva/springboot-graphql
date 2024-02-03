@@ -62,7 +62,7 @@ public class StudentServiceImpl implements IStudentService {
 
         // Atualiza os valores do estudante existente com os valores do objeto 'updatedStudent'
         existingStudent.setName(updateStudent.getName());
-        existingStudent.setLastname(updateStudent.getLastname());
+        existingStudent.setLastName(updateStudent.getLastName());
         existingStudent.setAge(updateStudent.getAge());
 
         // Salva o estudante existente no banco de dados
