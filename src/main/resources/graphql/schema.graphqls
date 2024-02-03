@@ -1,0 +1,29 @@
+# Query - para gerar as consultas de leitura usa-se o type Query
+type Query {
+
+    # Student
+    findStudentById(studentId: String) : Student,
+    findAllStudents : [Student]
+
+    # Course
+    findCourseById(courseId: String) : Course,
+    findAllCourses : [Course]
+}
+
+# OBS. Por exemplo, age: Int!, o simbolo ! significa que a propriedade é obrigatória, ou seja, não pode deixar null e nem vazio
+# Definições de tipos GraphQL para as entidades Student e Course, incluindo os campos e seus tipos associados.
+type Student {
+    id: ID, 
+    name: String,
+    lastName: String,
+    age: Int,
+    course: Course
+}
+
+type Course {
+    id: ID,
+    name: String,
+    category: String,
+    teacher: String,
+    studentList : [Student]
+}
