@@ -10,6 +10,15 @@ type Query {
     findAllCourses : [Course]
 }
 
+type Mutation {
+    
+    # Student
+    createStudent(inputStudent: InputStudent) : Student,
+    deleteStudentById(studentId: String) : String,
+    updateStudent(studentId: String, inputStudent: InputStudent) : Student
+
+}
+
 # OBS. Por exemplo, age: Int!, o simbolo ! significa que a propriedade é obrigatória, ou seja, não pode deixar null e nem vazio
 # Definições de tipos GraphQL para as entidades Student e Course, incluindo os campos e seus tipos associados.
 type Student {
@@ -26,4 +35,20 @@ type Course {
     category: String,
     teacher: String,
     studentList : [Student]
+}
+
+# Tipo de entrada de dados de student e course
+input InputStudent {
+    id: ID, 
+    name: String,
+    lastName: String,
+    age: Int,
+    courseId: String!
+}
+
+input InputCourse {
+    id: ID,
+    name: String,
+    category: String,
+    teacher: String
 }
