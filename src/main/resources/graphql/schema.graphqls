@@ -15,7 +15,11 @@ type Mutation {
     # Student
     createStudent(inputStudent: InputStudent) : Student,
     deleteStudentById(studentId: String) : String,
-    updateStudent(studentId: String, inputStudent: InputStudent) : Student
+    updateStudent(studentId: String, inputStudent: InputStudent) : Student,
+
+    # Course
+    createCourse(inputCourse: InputCourse) : Course,
+    deleteCourseById(courseId: String) : String
 
 }
 
