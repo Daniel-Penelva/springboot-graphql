@@ -31,8 +31,8 @@ public class GraphqlCourseController {
     }
 
     @MutationMapping
-    public Course createCourse(@Argument InputCourse inputCourse){
-        
+    public Course createCourse(@Argument InputCourse inputCourse) {
+
         Course course = new Course();
         course.setName(inputCourse.getName());
         course.setCategory(inputCourse.getCategory());
@@ -44,9 +44,27 @@ public class GraphqlCourseController {
     }
 
     @MutationMapping(name = "deleteCourseById")
-    public String deleteById(@Argument(name = "courseId") String id){
-        
+    public String deleteById(@Argument(name = "courseId") String id) {
+
         iCourseService.deleteById(Long.parseLong(id));
         return "course with id " + id + " successfully deleted!";
+    }
+
+    @MutationMapping
+    public Course updateCourse(@Argument(name = "courseId") String id, @Argument InputCourse inputCourse) {
+
+        // Converter o id String para Long
+        Long courseId = Long.parseLong(id);
+
+        // Convertendo InputCourse para Course
+        Course course = new Course();
+        course.setId(courseId);
+        course.setName(inputCourse.getName());
+        course.setCategory(inputCourse.getCategory());
+        course.setTeacher(inputCourse.getTeacher());
+
+        iCourseService.createCourse(course);
+
+        return course;
     }
 }

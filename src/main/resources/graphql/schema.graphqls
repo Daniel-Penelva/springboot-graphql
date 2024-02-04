@@ -19,7 +19,8 @@ type Mutation {
 
     # Course
     createCourse(inputCourse: InputCourse) : Course,
-    deleteCourseById(courseId: String) : String
+    deleteCourseById(courseId: String) : String,
+    updateCourse(courseId: String, inputCourse: InputCourse) : Course
 
 }
 
@@ -43,7 +44,7 @@ type Course {
 
 # Tipo de entrada de dados de student e course
 input InputStudent {
-    id: ID, 
+    id: ID,
     name: String,
     lastName: String,
     age: Int,

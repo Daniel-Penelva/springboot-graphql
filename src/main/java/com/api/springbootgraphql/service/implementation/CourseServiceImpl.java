@@ -46,4 +46,17 @@ public class CourseServiceImpl implements ICourseService {
 
     }
 
+    @Override
+    @Transactional
+    public Course updateCourse(Long id, Course updateCourse){
+
+        Course existingCourse = findById(id);
+
+        existingCourse.setName(updateCourse.getName());
+        existingCourse.setCategory(updateCourse.getCategory());
+        existingCourse.setTeacher(updateCourse.getTeacher());
+
+        return courseDao.save(existingCourse);
+    }
+
 }
