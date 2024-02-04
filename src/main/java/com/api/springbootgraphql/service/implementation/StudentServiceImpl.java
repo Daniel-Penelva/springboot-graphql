@@ -109,6 +109,13 @@ public class StudentServiceImpl implements IStudentService {
         }
     }
 
+    /* Exemplo Extra - para criar um estudante sem está associado ao curso (cursoId) */
+    @Override
+    @Transactional
+    public Student createStudentWithoutCourse(Student student){
+        return studentDao.save(student);
+    }
+
 }
 
 /* Bom saber:

@@ -8,6 +8,7 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
+import com.api.springbootgraphql.dto.StudentRequest;
 import com.api.springbootgraphql.entities.Course;
 import com.api.springbootgraphql.entities.Student;
 import com.api.springbootgraphql.graphiql.InputStudent;
@@ -120,6 +121,21 @@ public class GraphqlStudentController {
 
         // Retorna o estudante atualizado
         return updateStudent;
+    }
+
+
+    /* Exemplo Extra - para criar um estudante sem está associado ao curso (cursoId) */
+    @MutationMapping
+    public Student createStudentWithoutCourse(@Argument StudentRequest studentRequest){
+
+        Student student = new Student();
+        student.setName(studentRequest.name());
+        student.setLastName(studentRequest.lastName());
+        student.setAge(studentRequest.age());
+
+        iStudentService.createStudentWithoutCourse(student);
+
+        return student;
     }
 
 }

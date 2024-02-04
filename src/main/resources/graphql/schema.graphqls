@@ -18,6 +18,9 @@ type Mutation {
     updateStudent(studentId: String, inputStudent: InputStudent) : Student,
     createStudentAssociationAndCourse(studentId: String!, courseId: String!) : String,
 
+    # Exemplo Extra - para criar um estudante sem está associado ao curso (cursoId)
+    createStudentWithoutCourse(studentRequest: StudentRequest) : Student,
+
     # Course
     createCourse(inputCourse: InputCourse) : Course,
     deleteCourseById(courseId: String) : String,
@@ -57,4 +60,13 @@ input InputCourse {
     name: String,
     category: String,
     teacher: String
+}
+
+# Exemplo Extra - para criar um estudante sem está associado ao curso (cursoId)
+
+input StudentRequest{
+    id: ID,
+    name: String,
+    lastName: String,
+    age: Int
 }

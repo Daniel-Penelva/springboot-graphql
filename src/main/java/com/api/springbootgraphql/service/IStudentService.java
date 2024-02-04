@@ -20,4 +20,7 @@ public interface IStudentService {
 
     boolean associateStudentWithCourse(Long idStudent, Long idCourse);
 
+    /* Exemplo Extra - para criar um estudante sem está associado ao curso (cursoId) */
+    Student createStudentWithoutCourse(Student student);
+
 }
