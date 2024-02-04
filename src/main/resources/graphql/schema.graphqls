@@ -16,6 +16,7 @@ type Mutation {
     createStudent(inputStudent: InputStudent) : Student,
     deleteStudentById(studentId: String) : String,
     updateStudent(studentId: String, inputStudent: InputStudent) : Student,
+    createStudentAssociationAndCourse(studentId: String!, courseId: String!) : String,
 
     # Course
     createCourse(inputCourse: InputCourse) : Course,
@@ -48,7 +49,7 @@ input InputStudent {
     name: String,
     lastName: String,
     age: Int,
-    courseId: String!
+    courseId: String
 }
 
 input InputCourse {

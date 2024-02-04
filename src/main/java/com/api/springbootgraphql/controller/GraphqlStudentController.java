@@ -35,8 +35,10 @@ public class GraphqlStudentController {
         return iStudentService.findAll();
     }
 
+    /*  // Neste método, o Student é criado já associado ao Course (courseId).
     @MutationMapping
     public Student createStudent(@Argument InputStudent inputStudent) {
+        
         Course course = iCourseService.findById(Long.parseLong(inputStudent.getCourseId()));
 
         Student student = new Student();
@@ -48,6 +50,46 @@ public class GraphqlStudentController {
         iStudentService.createStudent(student);
         return student;
     }
+    */
+
+    // Refatorando CreateStudent, neste método o Student pode ser criado associando ao Course ou não associando ao Course (courseId).
+    @MutationMapping
+    public Student createStudent(@Argument InputStudent inputStudent) {
+
+        Student student = new Student();
+        student.setName(inputStudent.getName());
+        student.setLastName(inputStudent.getLastName());
+        student.setAge(inputStudent.getAge());
+
+        // Verifica se courseId não é nulo antes de associar o curso
+        if (inputStudent.getCourseId() != null) {
+            Course course = iCourseService.findById(Long.parseLong(inputStudent.getCourseId()));
+            student.setCourse(course);
+        }
+
+        iStudentService.createStudent(student);
+        return student;
+    }
+
+    // Cria a associação entre Student e Course
+    @MutationMapping
+    public String createStudentAssociationAndCourse(@Argument String studentId, @Argument String courseId){
+
+        // Convertendo Student String para Long 
+        Long student = Long.parseLong(studentId);
+
+        // Convertendo Course String para Long 
+        Long course = Long.parseLong(courseId);
+
+        try {
+            iStudentService.createAssociationStudentIncourse(student, course);
+            // ou pode chamar esse método também: // iStudentService.associateStudentWithCourse(student, course);
+            return "Student associated with Course successfully!";
+        } catch (Exception e) {
+            return "Failed to associate Student with Course. Reason: " + e.getMessage();
+        }
+        
+    }
 
     @MutationMapping(name = "deleteStudentById")
     public String deleteById(@Argument(name = "studentId") String id) {
@@ -56,7 +98,8 @@ public class GraphqlStudentController {
     }
 
     @MutationMapping
-    public Student updateStudent(@Argument(name = "studentId") String id, @Argument(name = "inputStudent") InputStudent inputStudent) {
+    public Student updateStudent(@Argument(name = "studentId") String id,
+            @Argument(name = "inputStudent") InputStudent inputStudent) {
 
         // Convertendo o id de String para Long do Student
         Long studentId = Long.parseLong(id);
